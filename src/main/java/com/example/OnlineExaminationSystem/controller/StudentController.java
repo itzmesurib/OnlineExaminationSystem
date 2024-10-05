@@ -30,10 +30,10 @@ public class StudentController {
         return "Student registered successfully!";
     }
 
-    @GetMapping("/all")
-    public List<Student> getAllStudents() {
-        return studentService.getAllStudents();
-    }
+//    @GetMapping("/all")
+//    public List<Student> getAllStudents() {
+//        return studentService.getAllStudents();
+//    }
 
     @PutMapping("/{studentId}")
     public ResponseEntity<Student> updateStudent(@PathVariable Long studentId, @RequestBody Student student) {

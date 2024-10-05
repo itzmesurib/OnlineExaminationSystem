@@ -2,7 +2,6 @@ package com.example.OnlineExaminationSystem.entity;
 
 import java.time.LocalDateTime;
 
-import org.antlr.v4.runtime.misc.NotNull;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,7 +23,6 @@ public class Student {
     private String email;
 
     @Column(nullable = false)
-    @NotNull
     private String password;
 
     private String phoneNumber;

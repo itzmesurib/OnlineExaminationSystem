@@ -3,30 +3,36 @@ package com.example.OnlineExaminationSystem.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.OnlineExaminationSystem.entity.Result;
 import com.example.OnlineExaminationSystem.repository.ResultRepository;
-
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
-
 
 @Service
 @Transactional
 public class ResultService {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    private final SessionFactory sessionFactory;
 
     @Autowired
     private ResultRepository resultRepository;
 
+    @Autowired
+    public ResultService(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    private Session getCurrentSession() {
+        return sessionFactory.getCurrentSession();
+    }
+
     // Add a new result
     public Result addResult(Result result) {
-        entityManager.persist(result);
+        getCurrentSession().persist(result);
         return result;
     }
 
@@ -37,7 +43,7 @@ public class ResultService {
 
     // Update an existing result
     public Result updateResult(Long id, Result result) {
-        Optional<Result> existingResultOptional = resultRepository.findById(id);
+        Optional<Result> existingResultOptional = Optional.of(resultRepository.findById(id));
         if (existingResultOptional.isPresent()) {
             Result existingResult = existingResultOptional.get();
             // Update fields as necessary
@@ -45,15 +51,15 @@ public class ResultService {
             existingResult.setTotalMarks(result.getTotalMarks());
             existingResult.setExamId(result.getExamId()); // Assuming there is a relation to the Exam entity
             
-            return entityManager.merge(existingResult); // Use merge for updating the entity
+            return (Result) getCurrentSession().merge(existingResult); // Use merge for updating the entity
         }
         return null; // Return null if the result does not exist
     }
 
     public void deleteResult(Long resultId) {
-        Result result = entityManager.find(Result.class, resultId);
+        Result result = getCurrentSession().get(Result.class, resultId);
         if (result != null) {
-            entityManager.remove(result);
+            getCurrentSession().remove(result);
         }
     }
 }

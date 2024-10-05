@@ -9,14 +9,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 
-
-
 @Entity
 public class QuestionPaper {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long question_paper_id;
+    private Long id;
 
     private String title;
 
@@ -32,11 +30,11 @@ public class QuestionPaper {
 
     // Getters and Setters
     public Long getId() {
-        return question_paper_id;
+        return id;
     }
 
     public void setId(Long id) {
-        this.question_paper_id = id;
+        this.id = id;
     }
 
     public String getTitle() {

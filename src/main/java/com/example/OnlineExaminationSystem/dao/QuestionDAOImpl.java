@@ -2,40 +2,45 @@ package com.example.OnlineExaminationSystem.dao;
 
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.example.OnlineExaminationSystem.entity.Question;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
 @Repository
 @Transactional
 public class QuestionDAOImpl implements QuestionDAO {
-    
-    @PersistenceContext
-    private EntityManager entityManager;
+
+    @Autowired
+    private SessionFactory sessionFactory; // Inject SessionFactory
 
     @Override
     public Question saveQuestion(Question question) {
-        entityManager.persist(question);
+        Session session = sessionFactory.getCurrentSession(); // Get current session
+        session.persist(question); // Use Session to persist
         return question;
     }
 
     @Override
     public Question getQuestionById(Long id) {
-        return entityManager.find(Question.class, id);
+        Session session = sessionFactory.getCurrentSession(); // Get current session
+        return session.get(Question.class, id); // Use Session to get question by ID
     }
 
     @Override
     public List<Question> getAllQuestions() {
-        return entityManager.createQuery("FROM Question", Question.class).getResultList();
+        Session session = sessionFactory.getCurrentSession(); // Get current session
+        return session.createQuery("FROM Question", Question.class).getResultList(); // Use Session to create query
     }
 
     @Override
     public void updateQuestion(Long id, Question question) {
-        Question existingQuestion = entityManager.find(Question.class, id);
+        Session session = sessionFactory.getCurrentSession(); // Get current session
+        Question existingQuestion = session.get(Question.class, id); // Use Session to find existing question
         if (existingQuestion != null) {
             existingQuestion.setQuestionText(question.getQuestionText());
             existingQuestion.setOption1(question.getOption1());
@@ -43,15 +48,16 @@ public class QuestionDAOImpl implements QuestionDAO {
             existingQuestion.setOption3(question.getOption3());
             existingQuestion.setOption4(question.getOption4());
             existingQuestion.setCorrectOption(question.getCorrectOption());
-            entityManager.merge(existingQuestion);
+            session.update(existingQuestion); // Use Session to update
         }
     }
 
     @Override
     public void deleteQuestion(Long id) {
-        Question question = entityManager.find(Question.class, id);
+        Session session = sessionFactory.getCurrentSession(); // Get current session
+        Question question = session.get(Question.class, id); // Use Session to find question
         if (question != null) {
-            entityManager.remove(question);
+            session.delete(question); // Use Session to delete
         }
     }
 }

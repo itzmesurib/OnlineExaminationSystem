@@ -26,9 +26,6 @@ public class Question {
 
     private String correctOption;
     
-    private String correctAnswer;
-    private Double marks;
-
     @ManyToOne
     @JoinColumn(name = "id", nullable = false)
     private QuestionPaper questionPaper;

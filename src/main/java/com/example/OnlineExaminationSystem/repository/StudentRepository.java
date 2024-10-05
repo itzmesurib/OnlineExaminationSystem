@@ -1,10 +1,13 @@
 package com.example.OnlineExaminationSystem.repository;
 
-import com.example.OnlineExaminationSystem.entity.Student;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.example.OnlineExaminationSystem.entity.Student;
+
 @Repository
-public interface StudentRepository extends JpaRepository<Student, Long> {
+public interface StudentRepository {
     Student findByEmail(String email);
+    void save(Student student);
+    void delete(Long id);
+    Student findById(Long id);
 }

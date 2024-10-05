@@ -1,6 +1,5 @@
 package com.example.OnlineExaminationSystem.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +24,12 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    // Get all admins
-    @GetMapping
-    public ResponseEntity<List<Admin>> getAllAdmins() {
-        List<Admin> admins = adminService.getAllAdmins();
-        return new ResponseEntity<>(admins, HttpStatus.OK);
-    }
+//    // Get all admins
+//    @GetMapping
+//    public ResponseEntity<List<Admin>> getAllAdmins() {
+//        List<Admin> admins = adminService.getAllAdmins();
+//        return new ResponseEntity<>(admins, HttpStatus.OK);
+//    }
 
     // Get admin by ID
     @GetMapping("/{id}")

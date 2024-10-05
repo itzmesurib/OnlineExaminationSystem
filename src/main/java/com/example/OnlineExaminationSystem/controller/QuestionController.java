@@ -20,10 +20,10 @@ public class QuestionController {
         return "Question added successfully!";
     }
 
-    @GetMapping("/all")
-    public List<Question> getAllQuestions() {
-        return questionService.getAllQuestions();
-    }
+//    @GetMapping("/all")
+//    public List<Question> getAllQuestions() {
+//        return questionService.getAllQuestions();
+//    }
 
 //    @PutMapping("/update")
 //    public String updateQuestion(@RequestBody Question question) {
@@ -31,9 +31,9 @@ public class QuestionController {
 //        return "Question updated successfully!";
 //    }
 
-    @DeleteMapping("/delete/{id}")
-    public String deleteQuestion(@PathVariable Long id) {
-        questionService.deleteQuestion(id);
-        return "Question deleted successfully!";
-    }
+//    @DeleteMapping("/delete/{id}")
+//    public String deleteQuestion(@PathVariable Long id) {
+//        questionService.deleteQuestion(id);
+//        return "Question deleted successfully!";
+//    }
 }

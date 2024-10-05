@@ -1,7 +1,7 @@
 package com.example.OnlineExaminationSystem.service;
 
-import java.util.List;
-
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,40 +9,31 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.OnlineExaminationSystem.entity.Question;
 import com.example.OnlineExaminationSystem.repository.QuestionRepository;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-
 @Service
 @Transactional
 public class QuestionService {
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
+    private final SessionFactory sessionFactory;
+    
     @Autowired
     private QuestionRepository questionRepository;
 
-    public List<Question> getAllQuestions() {
-        return questionRepository.findAll();
+    @Autowired
+    public QuestionService(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+    
+    private Session getCurrentSession() {
+        return sessionFactory.getCurrentSession();
     }
 
     public Question getQuestionById(Long id) {
-        return entityManager.find(Question.class, id);
+        return questionRepository.findById(id);
     }
 
-    public Question saveQuestion(Question question) {
-        entityManager.persist(question);
-        return question;
-    }
-
-    public void deleteQuestion(Long id) {
-        Question question = entityManager.find(Question.class, id);
-        if (question != null) {
-            entityManager.remove(question);
-        }
-    }
-    
     public Question addQuestion(Question question) {
         return questionRepository.save(question);
     }
+
+
 }

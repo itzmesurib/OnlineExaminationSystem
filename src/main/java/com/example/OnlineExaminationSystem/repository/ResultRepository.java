@@ -1,13 +1,16 @@
 package com.example.OnlineExaminationSystem.repository;
 
-import com.example.OnlineExaminationSystem.entity.Result;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
+import com.example.OnlineExaminationSystem.entity.Result;
+
 @Repository
-public interface ResultRepository extends JpaRepository<Result, Long> {
+public interface ResultRepository {
     List<Result> findByStudentId(Long studentId);
     List<Result> findByQuestionPaperId(Long questionPaperId);
+    void save(Result result);
+    void delete(Long id);
+    Result findById(Long id);
 }
