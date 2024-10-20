@@ -28,3 +28,5 @@ document.getElementById('studentRegisterForm').addEventListener('submit', functi
 	        alert('Student registration failed');
 	    });
 });
+
+

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="../static/css/styles2.css">
+    <script defer src="../static/js/studentDashboard.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">Student Dashboard</div>
+        <ul>
+            <li><a href="#" id="home-link">Home</a></li>
+            <li><a href="#" id="results-link">Results</a></li>
+            <li><a href="#" id="exams-link">Exams</a></li>
+            <li><a href="#" id="logout-link">Logout</a></li>
+        </ul>
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Home Section -->
+        <section id="home-section" class="section active">
+            <h1>Welcome, <span id="student-name">John Doe</span></h1>
+            <div class="student-info">
+                <p><strong>Roll Number:</strong> <span id="student-roll">12345</span></p>
+                <p><strong>Email:</strong> <span id="student-email">john.doe@example.com</span></p>
+                <p><strong>Course:</strong> <span id="student-course">Computer Science</span></p>
+                <p><strong>Average Grade:</strong> <span id="student-grade">85%</span></p>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results-section" class="section">
+            <h1>Your Results</h1>
+            <ul id="results-list">
+                <!-- List of results dynamically inserted here -->
+            </ul>
+        </section>
+
+        <!-- Exams Section -->
+        <section id="exams-section" class="section">
+            <h1>Upcoming Exams</h1>
+            <ul id="exams-list">
+                <!-- List of exams dynamically inserted here -->
+            </ul>
+        </section>
+    </div>
+</body>
+</html>
