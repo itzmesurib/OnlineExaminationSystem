@@ -19,6 +19,7 @@ document.getElementById('studentRegisterForm').addEventListener('submit', functi
 	.then(response => {
 	        if (response.ok) {
 	            alert('Student registered successfully');
+				window.location.href = "http://localhost:8080/students/login";
 	        } else {
 	            alert('Student registration failed');
 	        }

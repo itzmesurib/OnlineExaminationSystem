@@ -22,7 +22,8 @@ document.getElementById('studentLoginForm').addEventListener('submit', function 
             // Clear the error message
             errorMessage.textContent = '';
             // Redirect to the dashboard page
-            window.location.href = 'http://localhost:8080/students/dashboard';
+			let url = 'http://localhost:8080/students/by-username/' + username;
+            window.location.href = url;
         } else {
             // Show error message in red
             errorMessage.textContent = 'Invalid user credentials';
